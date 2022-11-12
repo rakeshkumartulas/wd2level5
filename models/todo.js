@@ -4,18 +4,11 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-     static async addTask(params) {
+        static async addTask(params) {
       return await Todo.create(params);
-
      }
      static async showList() {
       console.log("this my list items of todos \n");
-
       console.log(" Late payment ");
       console.log(
         (await Todo.overdue())
@@ -25,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
           .join("\n")
       );
       console.log("\n");
-
       console.log("Late fine for Today");
+       console.log("\n");
       console.log(
         (await Todo.dueToday())
           .map((todo) => todo.displayableString())
@@ -34,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       );
       console.log("\n");
       onsole.log("late fine Later");
+       console.log("\n");
       console.log(
         (await Todo.dueLater())
           .map((todo) => todo.displayableString())
@@ -64,7 +58,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
     }
-
     static async markAsComplete(id) {
       // FILL IN HERE TO MARK AN ITEM AS COMPLETE
       await Todo.update(
@@ -76,7 +69,6 @@ module.exports = (sequelize, DataTypes) => {
         }
       );
     }
-
     displayableString() {
       let checkbox = this.completed ? "[x]" : "[ ]";
       return `${this.id}. ${checkbox} ${this.title.trim()} ${
